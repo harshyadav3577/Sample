@@ -1,4 +1,30 @@
 # Starter pipeline
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'run'
+    projects: |
+      using System;
+      
+      namespace SampleApp
+      {
+          class Program
+          {
+              static void Main(string[] args)
+              {
+                  Console.WriteLine("Welcome to the SampleApp!");
+      
+                  // Prompt user for input
+                  Console.Write("Please enter your name: ");
+                  string name = Console.ReadLine();
+      
+                  // Greet the user
+                  Console.WriteLine($"Hello, {name}!");
+      
+                  Console.WriteLine("Press any key to exit...");
+                  Console.ReadKey();
+              }
+          }
+      }
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
