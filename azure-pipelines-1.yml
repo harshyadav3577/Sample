@@ -1,0 +1,48 @@
+trigger:
+  branches:
+    include:
+      - main
+
+stages:
+- stage: Build
+  displayName: Build Stage
+  jobs:
+  - job: BuildJob
+    displayName: Build Job
+    steps:
+    - script: |
+        # Add script to build PEGA application here
+        ./path/to/build_script.sh
+        echo "Building PEGA application"
+
+- stage: Test
+  displayName: Run Tests
+  jobs:
+  - job: TestJob
+    displayName: Test Job
+    steps:
+    - script: |
+        # Add script to run tests here
+        echo "Running tests"
+    - script: echo "Tests completed"
+- stage: InvokeAPI
+  displayName: Invoke PEGA REST API
+  jobs:
+  - job: InvokeAPIJob
+    displayName: Invoke API Job
+    steps:
+    - task: InvokeRestApi@1
+      displayName: 'Invoke GET Request'
+      inputs:
+        connectionType: 'connectedServiceName'  # Specify the Azure service connection to use
+        method: 'GET'
+        url: '<API_ENDPOINT>'  # Replace with the actual API endpoint URL
+
+    - task: InvokeRestApi@1
+      displayName: 'Invoke POST Request'
+      inputs:
+        connectionType: 'connectedServiceName'  # Specify the Azure service connection to use
+        method: 'POST'
+        url: '<API_ENDPOINT>'  # Replace with the actual API endpoint URL
+        contentType: 'application/json'
+        body: '{"key": "value"}'  # Replace with the actual JSON payload
