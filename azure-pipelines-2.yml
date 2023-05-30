@@ -13,7 +13,7 @@ stages:
           - task: AzurePowerShell@5
             displayName: 'Invoke Pega API'
             inputs:
-              azureSubscription: 'Your Azure subscription'
+              azureSubscription: '10032001F5EBE945'
               ScriptType: 'InlineScript'
               Inline: |
                 $uri = https://jsonplaceholder.typicode.com/posts/1  # Example API URL from GitHub
